@@ -54,8 +54,12 @@ public class Main {
   }
   
   @RequestMapping("/webhook")
-  String webhook() {
-    return "index";
+  String webhook(Map<String, Object> model) {
+	 
+	  ArrayList<String> output = new ArrayList<String>();
+	  output.add( (String) model.get("hello"));
+	  model.put("records", output);
+      return "db";
   }
   
   @RequestMapping("/db")
