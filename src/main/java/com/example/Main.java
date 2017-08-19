@@ -26,6 +26,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -54,10 +55,10 @@ public class Main {
   }
   
   @RequestMapping("/webhook")
-  String webhook(Map<String, Object> model) {
+  String webhook(Map<String, Object> model,final HttpServletRequest request) {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
-	  output.add( (String) model.get("hello"));
+	  output.add( request.getParameter("hello"));
 	  model.put("records", output);
       return "db";
   }
