@@ -61,11 +61,15 @@ public class Main {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
 	  output.add( request.getParameter("query"));
-	  System.out.println(request.getParameter("body"));
-	   
+	  
+	  Map<String, String[]> map =request.getParameterMap() ;
 	 
+		for (Map.Entry m : map.entrySet())
+		{
+			System.out.println(m.getKey()+"  "+m.getValue());
+		}
+		
 		 
- 
 		 
       return Core.parse(  request);
   }
