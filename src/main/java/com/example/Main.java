@@ -26,6 +26,8 @@ import org.springframework.web.servlet.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -62,16 +64,17 @@ public class Main {
 	  ArrayList<String> output = new ArrayList<String>();
 	  output.add( request.getParameter("query"));
 	  
-	  Map<String, String[]> map =request.getParameterMap() ;
 	 
-		for (Map.Entry m : map.entrySet())
-		{
-			System.out.println(m.getKey()+"  "+m.getValue());
-		}
-		
 		 
 		 
       return Core.parse(  request);
+  }
+  @RequestMapping(value="/webhook", method=RequestMethod.POST )
+  public @ResponseBody String webhook( @RequestParam("body") String name) {
+	 
+	  
+	   System.out.println(name);
+	  return "";
   }
   
   @RequestMapping("/db")
