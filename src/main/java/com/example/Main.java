@@ -65,7 +65,7 @@ public class Main {
 	   
 	 
 		 
-			System.out.println(request.getContentLength());
+	 System.out.println(request.getContextPath());
 		 
 		 
 		 
