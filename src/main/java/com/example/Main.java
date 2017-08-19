@@ -58,7 +58,7 @@ public class Main {
   String webhook(Map<String, Object> model,final HttpServletRequest request) {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
-	  output.add( request.getParameter("hello"));
+	  output.add( request.getParameter("query"));
 	  model.put("records", output);
       return "db";
   }
