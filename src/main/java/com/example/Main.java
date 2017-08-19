@@ -62,7 +62,7 @@ public class Main {
 	  
 	  Map<String, String[]> map = request.getParameterMap();
 	 
-		System.out.println(map.get("hub.verify_token"));  
+		System.out.println(map.get("hub.verify_token")[0]);  
 		  
       return "db";
   }
