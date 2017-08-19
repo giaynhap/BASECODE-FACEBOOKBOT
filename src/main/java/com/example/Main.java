@@ -22,9 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
@@ -34,7 +37,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
-
 @Controller
 @SpringBootApplication
 public class Main {
@@ -53,18 +55,20 @@ public class Main {
   String index() {
     return "index";
   }
-  
+  private Core Core = new Core();
   @RequestMapping("/webhook")
-  String webhook(Map<String, Object> model,final HttpServletRequest request) {
+  public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
 	  output.add( request.getParameter("query"));
 	  
 	  Map<String, String[]> map = request.getParameterMap();
 	 
-		System.out.println(map.get("hub.verify_token")[0]);  
-		  
-      return "db";
+		System.out.println(request.getQueryString());  
+		
+		 
+		 
+      return Core.parse(  request);
   }
   
   @RequestMapping("/db")
@@ -95,6 +99,7 @@ public class Main {
     } else {
       HikariConfig config = new HikariConfig();
       config.setJdbcUrl(dbUrl);
+      
       return new HikariDataSource(config);
     }
   }
