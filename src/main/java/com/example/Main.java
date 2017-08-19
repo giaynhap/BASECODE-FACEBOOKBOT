@@ -37,6 +37,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
+
+import java.io.BufferedReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,8 +78,15 @@ public class Main {
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
   public @ResponseBody String webhook( HttpServletRequest request) {
 	 
-	  String jsonString = request.getParameter("json");
-	  System.out.println(jsonString);
+	  StringBuffer jb = new StringBuffer();
+	  String line = null;
+	  try {
+	    BufferedReader reader = request.getReader();
+	    while ((line = reader.readLine()) != null)
+	      jb.append(line);
+	  } catch (Exception e) { /*report an error*/ }
+
+	  System.out.println(jb.toString());
 	  return "";
   }
   
