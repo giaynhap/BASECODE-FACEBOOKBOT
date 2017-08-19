@@ -61,7 +61,7 @@ public class Main {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
 	  output.add( request.getParameter("query"));
-	  
+	  System.out.println(request.getParameter("body"));
 	   
 	 
 		 
