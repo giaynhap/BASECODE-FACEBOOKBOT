@@ -65,9 +65,7 @@ public class Main {
 	   
 	 
 		 
-	 System.out.println(request.getContextPath());
-		 
-		 
+ 
 		 
       return Core.parse(  request);
   }

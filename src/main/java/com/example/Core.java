@@ -36,6 +36,7 @@ public class Core {
 		for (Map.Entry e :   Queries.entrySet())
 		{
 			output = analysis_key((String)e.getKey(), (String[])e.getValue(),Queries);
+			System.out.println((String)e.getKey());
 		}
 		return output;
 	}
