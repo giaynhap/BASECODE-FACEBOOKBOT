@@ -18,10 +18,14 @@ package com.example;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+
+import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.web.servlet.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -51,6 +55,7 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
+
   }
 
   @RequestMapping("/")
@@ -62,18 +67,17 @@ public class Main {
   public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
-	  output.add( request.getParameter("query"));
 	  
-	 
+	 System.out.println(request.getQueryString());
 		 
 		 
       return Core.parse(  request);
   }
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
-  public @ResponseBody String webhook( @RequestParam("body") String name) {
+  public @ResponseBody String webhook( HttpServletRequest request) {
 	 
-	  System.out.println("hello");
-	   System.out.println(name);
+	  String jsonString = request.getParameter("json");
+	  System.out.println(jsonString);
 	  return "";
   }
   
@@ -108,6 +112,21 @@ public class Main {
       
       return new HikariDataSource(config);
     }
+  }
+  @Bean
+  public EmbeddedServletContainerFactory servletContainer() {
+
+      TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+
+      Connector ajpConnector = new Connector("AJP/1.3");
+      ajpConnector.setProtocol("AJP/1.3");
+      ajpConnector.setPort(9090);
+      ajpConnector.setSecure(false);
+      ajpConnector.setAllowTrace(false);
+      ajpConnector.setScheme("http");
+      tomcat.addAdditionalTomcatConnectors(ajpConnector);
+
+      return tomcat;
   }
 
 }

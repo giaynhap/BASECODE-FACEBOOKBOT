@@ -1,0 +1,4 @@
+keytool -genkey -keyalg RSA -alias giaynhap -keystore E:/keystore.jks -storepass dovanthuc987 -validity 360 -keysize 2048
+keytool -v -list -keystore E:/keystore.jks
+keytool -exportcert -rfc -alias giaynhap -keystore E:/keystore.jks -file E:/giaynhap.crt
+keytool -printcert -file E:/giaynhap.crt
