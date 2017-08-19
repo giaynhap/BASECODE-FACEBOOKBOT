@@ -1,0 +1,407 @@
+body
+{
+	font-family: "Segoe UI",Arial,sans-serif;
+	margin: 0px 0px 0px;
+	    letter-spacing: 2px;
+}
+.inputstyle{
+	width: calc(100% - 42px);
+	height: 40px;
+	outline: none;
+	border: none;
+	background-color: #DFDFDF;
+	padding-left:10px;
+}
+.bigButtonLogin{
+	 background-color:#1abc9c;
+	 height: 40px;	
+	 line-height: 40px;
+	
+	 text-align: center;
+	 color: white;
+	 margin-top: 5px;
+	 cursor: pointer;
+}
+.bigButtonLogin:hover{
+	background-color: #13967c;
+}
+.background_form_login
+{
+	width: 100%;
+	height:100%;
+	background-color: #333;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+.formLogin{
+
+	background-color: #ffffff;
+}
+.formSignup{
+	background-color: #ffffff;
+ 
+}
+.logo_elm{
+	height: 80px;
+	width:width;
+	background-color: white;
+}
+.button
+{
+
+	color: #2196F3;
+ 	display: block;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px ;
+    cursor: pointer;
+    font-weight: 400;
+    font-family: "tahoma"
+}
+
+.button:hover
+{
+	background-color:#CCCCCC;
+}
+.btnLogin
+{
+
+	color: #2196F3;
+	float: right;
+	font-size: 14px;
+	width: 130px;
+	margin: 10px;
+}
+
+.nav_menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  	
+    background-color: #333;
+}
+
+.nav_menu li div {
+
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ 
+.nav_menu li div:hover {
+    background-color: #555;
+    color: white;
+
+}
+
+.nav_menu
+{
+	display: inline;
+	float: left;
+	height: 40px;
+	top: 40px;
+	 
+}
+ 
+
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+.head_button_menu div {
+    width: 35px;
+    height: 5px;
+
+    background-color: white;
+  	margin-bottom: 5px;
+}
+.head_button_menu{
+	padding: 10px;
+	width: 35px;
+	cursor: pointer;
+}
+.head_button_menu:hover{
+	 
+	 background-color: #555;
+
+}
+
+
+.head_tab_base{
+background-color:#1abc9c;
+height: 49px;
+width: 100%;
+ position: fixed;
+box-shadow: 0px 1px 1px #999999;
+}
+.contents{
+background-color: #FFFFFF;
+padding-top:50px;
+
+}
+.head_bas_login{
+	float: right;
+	display: inline;
+
+	height: 100%;
+	
+}
+
+
+
+
+@media all and (min-width: 300px) {  
+	.contents{
+		width: 100%;
+	}
+	li {
+		float: none;
+
+	}
+	.nav_menu
+	{
+	 
+		width: 120px;
+		position:initial;
+		display: none;
+	}
+	.head_button_menu
+	{
+		display: inline-block;
+		position:initial;
+		float: left;
+	}
+	.formLogin, .formSignup{
+		
+	 width: 100%;
+	 height: 100%;
+	}
+	#profile_name_button
+	{
+	opacity: 0.6;
+	}
+	 .post_Title{
+  
+	font-size: 10;
+	}
+}
+ 
+ 
+@media all and (min-width: 1024px) {
+	.contents{
+		width: 728px 	;
+	}
+	.nav_menu li {
+		float: left;
+
+
+	}
+	.head_button_menu
+	{
+
+		display: none;
+	}
+	.nav_menu
+	{
+		width: 600px;
+		display: inline-block;
+		position:initial;
+		
+	}
+	.formLogin{
+		width:320px;
+		height: 360px;
+		margin-left: calc(50% - 116px);
+		margin-top: 40px;
+	}
+	.formSignup
+	{
+		width:320px;
+		height: 500px;
+		margin-left: calc(50% - 116px);
+		margin-top: 40px;
+	}
+	#profile_name_button
+	{
+	opacity: 0.0;
+	}
+	 .post_Title{
+  
+	font-size: 15;
+	}
+}
+ 
+
+
+
+.loader {
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #e06031;  
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.styled-checkbox {
+  position: absolute;
+  opacity: 0;
+}
+.styled-checkbox + label {
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+}
+.styled-checkbox + label:before {
+  content: '';
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  width: 20px;
+  height: 20px;
+  background: white;
+}
+.styled-checkbox:hover + label:before {
+  background: #f35429;
+}
+.styled-checkbox:focus + label:before {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+.styled-checkbox:checked + label:before {
+  background: #f35429;
+}
+.styled-checkbox:disabled + label {
+  color: #b8b8b8;
+  cursor: auto;
+}
+.styled-checkbox:disabled + label:before {
+  box-shadow: none;
+  background: #ddd;
+}
+.styled-checkbox:checked + label:after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 9px;
+  background: white;
+  width: 2px;
+  height: 2px;
+  box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+
+/*profile CSS */
+
+.profile_page_header
+{
+width: 100%;
+height: 200px;
+background-color: #42aaf4;
+
+}
+.profile_image{
+	width: 140px;
+	height: 140px;
+	background-color:gray;
+	border-radius: 70px;
+ 	border:solid 2px #FFF;
+	margin-left: calc(50% - 70px);
+
+}
+.profile_header_content{
+	position: static;
+	top:30px;
+}
+.profile_name{
+	padding-left: 30px;
+	font-size: 30px;
+
+ ;
+
+}
+.profile_account{
+	font-size: 12px;
+	color: gray;
+
+}
+#profile_name_button
+{
+	width: 30px;
+	height: 30px;
+	background: url('../images/edit.svg') center no-repeat;
+	background-size:100% 100%;
+	display: inline-block ;
+	cursor: pointer;
+	 
+}
+#profile_name_button:hover
+{
+opacity: 0.6;
+}
+.content_h{
+	font-size: 15px;
+	font-weight: 600;
+	color: #444444;
+
+}
+.profile_content div{
+line-height: 30px;
+}
+.box
+{
+background-color: white;
+border-radius: 5px;
+padding: 10px;
+border: solid 1px #CCC;
+ 
+}
+
+
+/*up load*/
+.buttonstyle2{
+	padding: 10px;
+	background-color: #42929b;
+	text-align: center;
+	cursor: pointer;
+	color: white;
+}
+ 
+ .buttonstyle2:hover{
+ 
+	background-color:#2e676d;
+ 
+}
+ .post_Title{
+	color: #333;
+	font-weight: 600;
+	 
+	cursor: pointer;
+
+ }
+  .post_Title:hover{
+	color: #f47a42;
+ 
+ }
+ #upload_url_video {
+    resize: none;
+}

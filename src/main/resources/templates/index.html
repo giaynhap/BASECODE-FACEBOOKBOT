@@ -1,0 +1,526 @@
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./css.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body style="background-color:#666">
+        <div style="position: fixed;width: 200px;background-color:#222;color:white;top:0px;height:100%" >
+          <div class="content_h" style="color:white" >Chọn ảnh</div>
+          <div class = "msg_post" style= "background-color:#c4604a;color:white;padding: 5px;display: none;font-size: 10"> </div>		
+          <div style = "padding: 20px">
+
+           <code>Có thể kéo thả hình ảnh vào nút này, hoặc paste bitmap của ảnh vào đây</code>
+           <div style="height: 60px; line-height: 60px;text-align: center;cursor: pointer;background-color:#444" id = "upload_post_choose" class="box">
+               <div class="textChoose" name ="select_image">Chọn ảnh</div>
+               <div style = "margin-left: 45%;margin-top: 2%;display: none;" class="loader"></div> 
+           </div>
+           <input id="file-input" type="file" name="name" style="display: none;" accept="image/png, image/jpeg" />
+           <input id="fbg-input" type="file" name="name" style="display: none;" accept="image/png, image/jpeg" />
+           <div style="width: 100%">
+              <div class="content_h" style="color:white"  >Scale</div> 
+              <input  style="width:100%"type="range" id="scale_src" value="100" max="200">
+              <div class="content_h" style="color:white"  >Background Color</div>
+              <input  style="width:100%"type="range" id="background_color" value="0" max="360">
+          </div>
+      </div>
+      <a href="#gn" id="button_download" style="text-decoration: none;color:white">
+        <div style=" height: 60px; line-height: 60px;text-align: center;cursor: pointer;background-color:#444;margin:20px" id = "save_button" class="box">
+          Lưu
+      </div>
+    </a>
+    </div>
+    <div style="position:fixed;bottom:0px;width:100%;z-index: 5">
+       <div id="listBox" style="background-color:#333; height:60px;width:100% "> </div>
+       <div id="listBackground" style="background-color:#222;width:100%">  
+          <div id = "btncustombackground" style="width: 70px;height: 70px;background-color :#555;background-image:url('select.png');background-repeat: no-repeat;  background-size:70px 70px;;display: inline-block;cursor: pointer;">  </div> 
+      </div>
+    </div>
+    <center>
+        <div >
+            <div style="width: 80%;margin-left: 200px;margin-bottom:200px;margin-top:50px">
+                <canvas id = "display" >
+                </canvas>
+            </div>
+        </div>
+    </center>
+    <div style="top:0px;z-index: 20px;position: fixed; right: 20px;color:white; ">
+        <img src = "https://cdn2.iconfinder.com/data/icons/ios-7-tab-bar-icons/500/eye-512.png" width="20px"><span id= "NumViewElement"></span>
+        <script src = "http://localhost/countView/?urlids=http://localhost/JSiMAGE"></script>
+    </div>
+
+    <script>
+       $(document).ready(function() {
+        $("#upload_post_choose").click(function(){
+           $(".textChoose").css({"display":"none"});
+           $(".loader").css({"display":"block"});
+           $('#file-input').trigger('click');
+       })
+
+        $('#file-input').change(function(){
+          $(".loader").css({"display":"none"});
+          $(".textChoose").css({"display":"block"});
+          var reader = new FileReader();
+          reader.onload = (function(aImg) { 
+            return function(e) { 
+                aImg.src = e.target.result; 
+            }; 
+        })(srcImage);
+        reader.readAsDataURL($('#file-input')[0].files[0]);
+    });
+        $('#fbg-input').change(function(){
+            var reader = new FileReader();
+            reader.onload = (function(aImg) { 
+                return function(e) { 
+                    aImg.src = e.target.result; 
+                    doBimap();
+                }; 
+            })(img);
+            reader.readAsDataURL($('#fbg-input')[0].files[0]);
+
+        });
+        $('#background_color').change  (function(){
+           hue=$(this).val();
+
+           doBimap();
+
+       });
+        $('#scale_src').change  (function(){
+          scale=$(this).val();
+
+      });
+        $("#btncustombackground").click(function(){
+           $('#fbg-input').trigger('click');
+
+       });
+
+
+        $("#save_button").click(function(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(srcImage,image.x,image.y, image.w *scale/100, image.h * scale/100 );
+            ctx.drawImage(imageBackground,0,0,1024,683);
+
+            if (!isSave)
+
+                var imagev = canvas.toDataURL('image/jpeg'); 
+      //window.location.href=imagev;  
+      link = document.getElementById("button_download");
+      link.href = imagev;
+      link.download = "giaynhapTools.jpg";
+    })
+
+        var DrawFileImage = document.getElementById("upload_post_choose");
+        if (DrawFileImage!=null)
+        {
+            DrawFileImage.addEventListener("dragover", function (e) {
+
+                $(DrawFileImage).css({"background-color":"gray"});
+
+                e.preventDefault();
+            });
+            DrawFileImage.addEventListener("drop", function (e) {
+
+               e.preventDefault();
+               $(".loader").css({"display":"none"});
+               $(".textChoose").css({"display":"block"});
+
+               var dt = e.dataTransfer;
+               $(DrawFileImage).css({"background-color":"white"});
+               var reader = new FileReader();
+               reader.onload = (function(aImg) { 
+                return function(e) { 
+                    aImg.src = e.target.result; 
+                }; 
+            })(srcImage);
+            var dt = e.dataTransfer;
+            $(DrawFileImage).css({"background-color":"white"});
+            
+            reader.readAsDataURL(dt.files[0]);
+
+        });
+
+            DrawFileImage.addEventListener("dragleave", function( e ) {
+                $(DrawFileImage).css({"background-color":"white"});
+
+            }, false);
+
+            document.body.addEventListener("paste", function(e){
+
+                for (var i = 0 ; i < e.clipboardData.items.length ; i++) {
+                    var item = e.clipboardData.items[i];
+
+                    if (item.type.indexOf("image")> -1) {
+                        $(".loader").css({"display":"none"});
+                        $(".textChoose").css({"display":"block"});
+
+                        var reader = new FileReader();
+                        reader.onload = (function(aImg) { 
+                            return function(e) { 
+                                aImg.src = e.target.result; 
+                            }; 
+                        })(srcImage);
+                        reader.readAsDataURL(item.getAsFile());
+
+
+                        break;
+                    } else {
+
+                    }
+                }
+
+            });
+
+        }
+        updateListBackground()
+        updateListBox()
+    });
+
+       var listBackground = [];
+       var listBox = [];
+       function load_listBackground()
+       {
+
+           for (var i=0 ;i < 6;i++)
+           {
+            listBackground[i] = new Image();
+            listBackground[i].src = "background_"+(i+1)+".png";
+        }   
+    }
+    function load_listBox()
+    {
+
+       for (var i=0 ;i < 3;i++)
+       {
+        listBox[i] = new Image();
+        listBox[i].src = "box_"+i+".png";
+        
+    }   
+
+    }
+    function loadResource()
+    {
+        load_listBox();
+        load_listBackground();
+        img.src = "background_2.png";
+        imageBackground.src= img.src;
+        imageBox.src= "box_2.png";
+    }
+
+    function updateListBackground()
+    {
+     for (var i=0 ;i < 6;i++ )
+     {
+        $("#listBackground").append(' <img class="bbackground" src="background_'+(i+1)+'.png" dataid='+i+' style= "cursor:pointer;width:120px;height:70px;background-color:#111"/>');
+    }
+    $(".bbackground").click(function(){
+        backgroundIndex = $(this).attr("dataid");
+
+        setBG (backgroundIndex);
+    })
+    }
+    function updateListBox()
+    {
+
+        for (var i=0 ;i < 3;i++)
+        {
+
+           $("#listBox").append(' <img class="bbox" src="box_'+i+'.png" dataid='+i+' style= "cursor:pointer;width:100px;height:100%;float:left"/>');
+
+       }   
+       $(".bbox").click(function(){
+        index = $(this).attr("dataid");
+        console.log(index);
+        imageBox = listBox[index];
+        setBG (backgroundIndex);
+
+    })
+    }
+
+    function setBG (index)
+    {
+        img = listBackground[index];
+        doBimap();
+    }
+
+    var backgroundIndex= 0;
+    var hue=0;
+    var imageBackground= new Image();
+    var scale = 100;
+    var image ={x:0,y:0,w:0,h:0}
+    var isLoad = false;
+    var srcImage = new Image();
+    srcImage.src= "2.jpg";
+    var img = new Image();
+    imageBox = new Image();
+
+    loadResource();
+
+
+
+
+    canvas = document.getElementById("display");
+    ctx  = canvas.getContext('2d');
+    canvas.width = 1024 ;
+    canvas.height = 683 ;
+
+    srcImage.onload = function()
+    {
+        image.w =this.width;
+        image.h =this.height;
+
+    }
+
+    img.onload = function() {
+        isLoad = true;
+        doBimap();
+    };
+    imageBackground.onload = function() {
+
+        isLoad = true;
+    };
+    setInterval(doRepaint,100)
+    var isSave = false;
+
+    function doRepaint()
+    {
+    	if (!isLoad) return;
+    	ctx.clearRect(0, 0, canvas.width, canvas.height);
+    	ctx.drawImage(srcImage,image.x,image.y, image.w *scale/100, image.h * scale/100 );
+    	ctx.drawImage(imageBackground,0,0);
+        ctx.beginPath();
+        ctx.moveTo(image.x,image.y);
+        ctx.lineTo(image.x  ,image.y+image.h*scale/100);
+        ctx.lineTo(image.w*scale/100 +image.x ,image.h*scale/100+image.y);
+        ctx.lineTo(image.w*scale/100 +image.x ,image.y);
+        ctx.lineTo(image.x ,image.y);
+        ctx.stroke();
+    }
+
+
+    // mouse
+    mPostLast = {x:0,y:0};
+    canvas.addEventListener ("mousedown" , eleMouseDown , false);
+
+    function eleMouseDown (event ) {
+        stateMouseDown = true;
+        document.addEventListener ("mousemove" , eleMouseMove , false);
+        mPostLast.x = event.offsetX ;
+        mPostLast.y = event.offsetY ;
+    }
+
+    function eleMouseMove (ev) {
+        var pX = ev.pageX;
+        var pY = ev.pageY;
+        image.x += ev.offsetX - mPostLast.x ;
+        image.y += ev.offsetY - mPostLast.y ;
+        mPostLast.x = ev.offsetX ;
+        mPostLast.y = ev.offsetY ;
+
+        document.addEventListener ("mouseup" , eleMouseUp , false);
+    }
+
+    function eleMouseUp () {
+        document.removeEventListener ("mousemove" , eleMouseMove , false);
+        document.removeEventListener ("mouseup" , eleMouseUp , false);
+    }
+
+    function doBimap()
+    {
+       isLoad = false;
+       ctx.clearRect(0, 0, canvas.width, canvas.height);
+       ctx.drawImage(img,0,0,1024,683);
+
+       var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+       ctx.clearRect(0, 0, canvas.width, canvas.height);
+       ctx.drawImage(imageBox,0,0);
+
+       var imageData2 = ctx.getImageData(0, 0, canvas.width, canvas.height);
+       ctx.imageSmoothingEnabled= true
+       var data = imageData.data  ;
+       var data2 = imageData2.data  ;
+       for(var i=0;i<data.length;i+=4){
+        red=data[i+0];
+        green=data[i+1];
+        blue=data[i+2];
+        alpha=data[i+3];
+        var hsv=rgb2hsv(red,green,blue);
+        var hue2=hsv.h+Math.round(hue)  ;
+        var newRgb=hsvToRgb(hue2 ,hsv.s,hsv.v);
+
+        imageData.data[i+0]=newRgb[0];
+        imageData.data[i+1]=newRgb[1];
+        imageData.data[i+2]=newRgb[2]; 
+
+
+        if(data2[i+1]<100&&data2[i+2]<100&&data2[i+0]>=100)
+        {
+            imageData.data[i+3]=255- data2[i+0];
+        }
+        else {
+            if (data2[i+3]>0)
+            {
+
+                imageData.data[i+0]= overLay(data[i+0],data2[i+0])*(data2[i+3]/255)  +(1-data2[i+3]/255)*imageData.data[i+0];
+                imageData.data[i+1]= overLay(data[i+1],data2[i+1])*(data2[i+3]/255)  + (1-data2[i+3]/255)*imageData.data[i+1];
+                imageData.data[i+2]= overLay(data[i+2],data2[i+2])*(data2[i+3]/255)  +  (1-data2[i+3]/255)*imageData.data[i+2];
+            }
+
+        }
+    }    
+
+    function overLay(A,B)
+    {
+        A/=255;
+        B/=255;
+        return  Math.floor( ((B <= 0.5) ? (2 * A * B ):( 1-2*(1-A)*(1-B))) *255);
+    }
+
+
+    ctx.putImageData(imageData,0,0);
+    imagev = canvas.toDataURL('image/png'); 
+    imageBackground.src = imagev;
+
+    }
+
+    function rgb2hsv (r,g,b) {
+        var rr, gg, bb;
+        r = r / 255.0;
+        g = g / 255.0;
+        b = b / 255.0;
+
+        var h, s,
+        v = Math.max(r, g, b),
+
+        diff = v - Math.min(r, g, b),
+        diffc = function(c){
+            return (v - c) / 6 / diff + 1 / 2;
+        };
+
+        if (diff == 0) {
+            h = s = 0;
+        } else {
+            s = diff / v;
+            rr = diffc(r);
+            gg = diffc(g);
+            bb = diffc(b);
+
+            if (r === v) {
+                h = bb - gg;
+            }else if (g === v) {
+                h = (1 / 3) + rr - bb;
+            }else if (b === v) {
+                h = (2 / 3) + gg - rr;
+            }
+            if (h < 0) {
+                h += 1;
+            }else if (h > 1) {
+                h -= 1;
+            }
+        }
+        return {
+            h: Math.floor(h * 360),
+            s: Math.floor(s * 100),
+            v: Math.floor(v * 100)
+        };
+    }
+
+    function hsvToRgb(h, s, v) {
+        var r, g, b;
+        var i;
+        var f, p, q, t;
+
+        while (h>360)
+        {
+            h-=360;
+        }
+        while (s>100)
+        {
+            h-=100;
+        }
+        while (v>100)
+        {
+            h-=100;
+        }
+        s /= 100;
+        v /= 100;
+
+        if(s == 0) {
+            r = g = b = v;
+            return [
+            Math.floor(r * 255), 
+            Math.floor(g * 255), 
+            Math.floor(b * 255)
+            ];
+        }
+
+        h /= 60; 
+        i = Math.floor(h);
+        f = h - i; 
+        p = v * (1 - s);
+        q = v * (1 - s * f);
+        t = v * (1 - s * (1 - f));
+
+        switch(i) {
+            case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+
+            case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+
+            case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+
+            case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+
+            case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+
+            default: // case 5:
+            r = v;
+            g = p;
+            b = q;
+        }
+
+
+        return [
+        Math.floor(r * 255), 
+        Math.floor(g * 255), 
+        Math.floor(b * 255)
+        ];
+    }
+    </script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=1207423352719639";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div id = "page_fanpage2" style="position: fixed; ; width: 300px;left: calc(100% - 300px);bottom: 0px;z-index:10">
+
+        <div id="page_fanpage" >
+
+            <div class="fb-page" data-href="https://www.facebook.com/ketbankhonggoihan/" data-width="300" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/ketbankhonggoihan/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ketbankhonggoihan/">Chat Với Người Lạ</a></blockquote></div>
+        </div>  
+    </div>
+    </body>
+
+    </html>
+
