@@ -64,7 +64,10 @@ public class Main {
 	  
 	  Map<String, String[]> map = request.getParameterMap();
 	 
-		System.out.println(request.getQueryString());  
+		for (Map.Entry m : map.entrySet())
+		{
+			System.out.println(m.getKey());
+		}
 		
 		 
 		 
