@@ -61,9 +61,9 @@ public class Main {
 	  output.add( request.getParameter("query"));
 	  
 	  Map<String, String[]> map = request.getParameterMap();
-	  for(Map.Entry m:map.entrySet()){  
-		   System.out.println(m.getKey()+" "+m.getValue());  
-		  }  
+	 
+		System.out.println(map.get("hub.verify_token"));  
+		  
       return "db";
   }
   
