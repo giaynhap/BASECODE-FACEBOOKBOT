@@ -35,14 +35,16 @@ public class ProcessMessage extends ProcessAbs{
 			{
 				BaseMessage message = (BaseMessage)msg;
 				try {
-					String msgRep = function.makeJsonSendText(message.getFromUser(),"FacebookMessageBot-Java-GiấyNháp");
-					try {
-						Https.POST(function.makeUrlGraphAPI("me/messages?"),msgRep);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} catch (JSONException e) {
+					//send message
+					
+					
+					String msgRep = function.makeJsonSendText(message.getFromUser(),"FacebookMessageBot-Java-GiấyNháp \n  ");
+				
+					Https.POST(function.makeUrlGraphAPI("me/messages?"),msgRep);
+					
+					
+				 
+				} catch (  Exception e) {
 					continue;
 				 
 				}

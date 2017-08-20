@@ -42,7 +42,7 @@ public class ProcessAbs implements Runnable{
 	}
 	public void add(Object request)
 	{
-		 System.out.println("Analsy data request Post "+queue.size());
+		 
 		queue.add(request);
 	}
 	public void clear()

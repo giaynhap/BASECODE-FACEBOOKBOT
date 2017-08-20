@@ -33,6 +33,7 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.web.servlet.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,6 +44,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,14 +77,28 @@ public class Main {
   }
 
   @RequestMapping("/")
-  String index() {
+  String  index(Map<String, Object> model) {
 	  ProcessMain.getInstance().add("{\"object\":\"page\",\"entry\":[{\"id\":\"323985201385737\",\"time\":1503215010684,\"messaging\":[{\"sender\":{\"id\":\"1652270848157684\"},\"recipient\":{\"id\":\"323985201385737\"},\"timestamp\":1503215010321,\"message\":{\"mid\":\"mid.$cAAF8X4xwgONkL94KEVd_mFcs0bRE\",\"seq\":6490,\"text\":\"\u00ea cu\"}}]}]}");
-		 
-    return "db";
+	  
+	  try {
+		String hostName = InetAddress.getLocalHost().getHostName()+"name";
+		
+		
+		
+	
+		model.put("hostname", hostName);
+		model.put("PageID: ", Configs.pageID);
+	} catch (UnknownHostException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+    return "giaynhap";
   }
   
-  @RequestMapping("/webhook")
+  @RequestMapping(value="/webhook", method=RequestMethod.GET )
   public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
+	  // GET
 	  ArrayList<String> output = new ArrayList<String>();
       return Register.parse(  request);
   }
@@ -86,8 +106,8 @@ public class Main {
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
   public @ResponseBody String webhook( HttpServletRequest request) {
 	 
+	  // POST
 	  String msg = getRequestString( (HttpServletRequest)request );
-	  
 	  ProcessMain.getInstance().add(msg);
 	  return "";
   }
@@ -102,31 +122,10 @@ public class Main {
 	    while ((line = reader.readLine()) != null)
 	      jb.append(line);
 	  } catch (Exception e) { }
-	  String rtstr = jb.toString();
-	  System.out.println(rtstr);
-	 return rtstr;
+	 
+	 return jb.toString();
   }
- 
-  @RequestMapping("/db")
-  String db(Map<String, Object> model) {
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-      stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-      ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-
-      ArrayList<String> output = new ArrayList<String>();
-      while (rs.next()) {
-        output.add("Read from DB: " + rs.getTimestamp("tick"));
-      }
-
-      model.put("records", output);
-      return "db";
-    } catch (Exception e) {
-      model.put("message", e.getMessage());
-      return "error";
-    }
-  }
+  
 
   @Bean
   public DataSource dataSource() throws SQLException {
