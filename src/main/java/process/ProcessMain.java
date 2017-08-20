@@ -51,8 +51,8 @@ public class ProcessMain extends ProcessAbs{
 		ArrayList<BaseMessage> rtArray = new ArrayList<BaseMessage>();
 		 for (Object request : list)
          {
-        	 String msg = getRequestString( (HttpServletRequest)request );
-        	 if (msg==null) continue;
+        	 
+        	 String msg = (String)request;
         	 try {
 				JSONObject json = new JSONObject(msg);
 				JSONArray entrys = json.getJSONArray("entry");
@@ -84,17 +84,6 @@ public class ProcessMain extends ProcessAbs{
 		
 	}
 	
-	public String getRequestString( HttpServletRequest request )
-	  {
-		  StringBuffer jb = new StringBuffer();
-		  String line = null;
-		  try {
-		    BufferedReader reader = request.getReader();
-		    while ((line = reader.readLine()) != null)
-		      jb.append(line);
-		  } catch (Exception e) { }
-
-		 return jb.toString();
-	  }
+	
 	 
 }

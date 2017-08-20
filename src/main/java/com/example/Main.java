@@ -85,11 +85,13 @@ public class Main {
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
   public @ResponseBody String webhook( HttpServletRequest request) {
 	 
-	 
-	  ProcessMain.getInstance().add(request);
+	  String msg = getRequestString( (HttpServletRequest)request );
+	  
+	  ProcessMain.getInstance().add(msg);
 	  return "";
   }
   
+ 
   public String getRequestString( HttpServletRequest request )
   {
 	  StringBuffer jb = new StringBuffer();
