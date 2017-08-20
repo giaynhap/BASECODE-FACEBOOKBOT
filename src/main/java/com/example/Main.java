@@ -19,6 +19,7 @@ package com.example;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import object.function;
 import process.ProcessMain;
 import process.ProcessMessage;
 
@@ -65,11 +66,10 @@ public class Main {
   }
   public static void main(String[] args) throws Exception {
 	  
-	  
-	
-    SpringApplication.run(Main.class, args);
+	 
+     SpringApplication.run(Main.class, args);
     
-    init();
+     init();
   }
 
   @RequestMapping("/")

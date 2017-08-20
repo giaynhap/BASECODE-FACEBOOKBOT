@@ -69,7 +69,6 @@ public class ProcessMain extends ProcessAbs{
 						 String recipient_id =  message.getJSONObject("recipient").getString("id");
 						 JSONObject msg_t = message.getJSONObject("message");
 						 BaseMessage base = new BaseMessage();
-						 
 						
 						 base.setFromUser(sender_id);
 						 base.setToUser(recipient_id) ;
@@ -80,7 +79,7 @@ public class ProcessMain extends ProcessAbs{
 				
 			} catch (JSONException e) {
 			
-				e.printStackTrace();
+				 
 				continue;
 			}
          }

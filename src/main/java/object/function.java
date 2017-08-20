@@ -9,7 +9,7 @@ public class function {
 	{
 		JSONObject obj = makeBaseJson(  user_id);
 		 
-		obj.put("message", new JSONObject().put("text", text));
+		obj.put("message", new JSONObject().put("text", escape_string(text)));
 		return obj.toString();
 		
 	}
@@ -29,4 +29,17 @@ public class function {
 			url.append(Configs.accessToken);
 			return url.toString();
 		}
+	public static String escape_string(String str)
+	{
+		 StringBuilder b = new StringBuilder();
+
+		    for (char c : str.toCharArray()) {
+		        if (c >= 128)
+		            b.append("\\u").append( Integer.toHexString(c|0x10000).substring(1));
+		        else
+		            b.append(c);
+		    }
+
+		    return b.toString();
+	}
 }
