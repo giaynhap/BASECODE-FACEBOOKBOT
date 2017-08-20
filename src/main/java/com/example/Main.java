@@ -63,7 +63,7 @@ public class Main {
 	} catch (UnknownHostException e) {
 		e.printStackTrace();
 	}
-    return "giaynhap";
+    return "index";
   }
   
   @RequestMapping(value="/webhook", method=RequestMethod.GET )
