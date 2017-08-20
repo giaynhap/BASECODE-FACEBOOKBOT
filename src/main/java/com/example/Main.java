@@ -74,7 +74,7 @@ public class Main {
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
   public @ResponseBody String webhook( HttpServletRequest request) {
 	 
-	  
+	  System.out.println("output");
 	  return Core.getInstance().parse( getRequestString(request) );
   }
   
