@@ -74,8 +74,8 @@ public class ProcessMain extends ProcessAbs{
 				}
 				
 			} catch (JSONException e) {
-				System.out.println(msg);
-				
+			
+				e.printStackTrace();
 				continue;
 			}
          }
