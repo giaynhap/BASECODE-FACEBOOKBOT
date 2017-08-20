@@ -29,7 +29,7 @@ public class ProcessMain extends ProcessAbs{
 	@Override
 	public void process()
 	{
-		 System.out.println("Analsy data request Post ");
+		
 		if (queue != null && queue.size() > 0)
 		{
 			
