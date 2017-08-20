@@ -29,9 +29,10 @@ public class ProcessMain extends ProcessAbs{
 	@Override
 	public void process()
 	{
+		 System.out.println("Analsy data request Post ");
 		if (queue != null && queue.size() > 0)
 		{
-			 System.out.println("Analsy data request Post ");
+			
 			 ArrayList<Object> list = new ArrayList<Object>();
 			 
 	         queue.drainTo(list);
@@ -73,6 +74,7 @@ public class ProcessMain extends ProcessAbs{
 				}
 				
 			} catch (JSONException e) {
+				e.printStackTrace();
 				continue;
 			}
          }
