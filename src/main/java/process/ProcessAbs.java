@@ -5,7 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ProcessAbs implements Runnable{
+abstract class ProcessAbs implements Runnable{
 	private Thread thread;
 	protected BlockingQueue<Object> queue;
 	public ProcessAbs(String name)
@@ -42,7 +42,6 @@ public class ProcessAbs implements Runnable{
 	}
 	public void add(Object request)
 	{
-		 
 		queue.add(request);
 	}
 	public void clear()

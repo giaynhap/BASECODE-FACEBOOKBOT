@@ -28,10 +28,20 @@ color:#d65c37;
 </div>
 <hr width="100%">
 <div style="color:white;padding:40px;line-height:20px;font-family:Monospace">
+ *Your Configs <br>
+ <div style="margin-left:10px">
  HOST NAME: <span th:text="${hostname}" > <br>
  PAGE: <span th:text="${PageID}" >
+ ACCESS TOKEN: <span th:text="${token}" >
+ </div>
 </div>
+<hr width="100%">
+<div style="color:white;padding:40px;line-height:20px;font-family:Monospace">
+ - Config access_token , page id, appkey trong class Configs<br>
+ - ProcessMain,ProcessMessage là 2 tiến trình xử lý trong đó. ProcessMain xử lý dữu liệu nền từ facebook gửi đến. rồi chuyền qua ProcessMessage xứ lý gửi trả kết quả...
  
+</div>
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

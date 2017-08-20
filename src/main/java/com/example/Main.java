@@ -1,5 +1,3 @@
-
-
 package com.example;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -61,6 +59,7 @@ public class Main {
 		String hostName = InetAddress.getLocalHost().getHostName();
 		model.put("hostname", hostName);
 		model.put("PageID", Configs.pageID);
+		model.put("token", Configs.accessToken);
 	} catch (UnknownHostException e) {
 		e.printStackTrace();
 	}
@@ -70,7 +69,6 @@ public class Main {
   @RequestMapping(value="/webhook", method=RequestMethod.GET )
   public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
 	  // GET
-	  ArrayList<String> output = new ArrayList<String>();
       return Register.parse(  request);
   }
   

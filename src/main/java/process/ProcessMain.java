@@ -1,5 +1,4 @@
 package process;
-
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
@@ -32,14 +31,12 @@ public class ProcessMain extends ProcessAbs{
 		
 		if (queue != null && queue.size() > 0)
 		{
-			
 			 ArrayList<Object> list = new ArrayList<Object>();
 			 
 	         queue.drainTo(list);
 	         ArrayList<BaseMessage> msglist = validateContraint(  list );
 	         for (BaseMessage msg: msglist)
 	         {
-	        	
 	        	 if (!msg.getFromUser().equals(Configs.pageID))
 	        	 {
 	        		 ProcessMessage.getInstance().add(msg);

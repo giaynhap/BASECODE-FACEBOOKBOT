@@ -1,12 +1,8 @@
 package process;
-
 import java.io.BufferedReader;
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.json.JSONException;
-
 import object.BaseMessage;
 import object.Https;
 import object.function;
@@ -42,8 +38,7 @@ public class ProcessMessage extends ProcessAbs{
 				
 					Https.POST(function.makeUrlGraphAPI("me/messages?"),msgRep);
 					
-					
-				 
+
 				} catch (  Exception e) {
 					continue;
 				 
