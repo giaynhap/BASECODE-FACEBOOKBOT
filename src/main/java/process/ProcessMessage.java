@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
 
 import object.BaseMessage;
+import object.Https;
 import object.function;
 
 public class ProcessMessage extends ProcessAbs{
@@ -35,7 +36,12 @@ public class ProcessMessage extends ProcessAbs{
 				BaseMessage message = (BaseMessage)msg;
 				try {
 					String msgRep = function.makeJsonSendText(message.getFromUser(),"FacebookMessageBot-Java-GiấyNháp");
-					System.out.println(msgRep);
+					try {
+						Https.POST(function.makeUrlGraphAPI("me/messages?"),msgRep);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} catch (JSONException e) {
 					continue;
 				 

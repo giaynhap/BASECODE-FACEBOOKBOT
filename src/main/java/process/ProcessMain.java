@@ -39,6 +39,7 @@ public class ProcessMain extends ProcessAbs{
 	         ArrayList<BaseMessage> msglist = validateContraint(  list );
 	         for (BaseMessage msg: msglist)
 	         {
+	        	
 	        	 if (!msg.getFromUser().equals(Configs.pageID))
 	        	 {
 	        		 ProcessMessage.getInstance().add(msg);
@@ -56,16 +57,20 @@ public class ProcessMain extends ProcessAbs{
         	 try {
 				JSONObject json = new JSONObject(msg);
 				JSONArray entrys = json.getJSONArray("entry");
+			
 				for (int i=0 ;i<entrys.length();i++ )
 				{
-					JSONArray messages = entrys.getJSONArray(i);
-					for (int j=0 ;j<messages.length();i++ )
+					JSONArray messages = (entrys.getJSONObject(i)).getJSONArray("messaging");
+					for (int j=0 ;j<messages.length();j++ )
 					{
-						 JSONObject message = messages.getJSONObject(i);
+						
+						 JSONObject message = messages.getJSONObject(j);
 						 String sender_id = message.getJSONObject("sender").getString("id");
 						 String recipient_id =  message.getJSONObject("recipient").getString("id");
 						 JSONObject msg_t = message.getJSONObject("message");
 						 BaseMessage base = new BaseMessage();
+						 
+						
 						 base.setFromUser(sender_id);
 						 base.setToUser(recipient_id) ;
 						 base.setMessage(msg_t.toString());

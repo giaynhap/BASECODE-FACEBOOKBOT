@@ -68,11 +68,14 @@ public class Main {
 	  
 	
     SpringApplication.run(Main.class, args);
+    
     init();
   }
 
   @RequestMapping("/")
   String index() {
+	  ProcessMain.getInstance().add("{\"object\":\"page\",\"entry\":[{\"id\":\"323985201385737\",\"time\":1503215010684,\"messaging\":[{\"sender\":{\"id\":\"1652270848157684\"},\"recipient\":{\"id\":\"323985201385737\"},\"timestamp\":1503215010321,\"message\":{\"mid\":\"mid.$cAAF8X4xwgONkL94KEVd_mFcs0bRE\",\"seq\":6490,\"text\":\"\u00ea cu\"}}]}]}");
+		 
     return "db";
   }
   

@@ -29,7 +29,7 @@ public class BaseMessage {
 	}
 	public String getFromUser( )
 	{
-		return this.from = ID;
+		return this.from  ;
 	}
 	public String getToUser( )
 	{
