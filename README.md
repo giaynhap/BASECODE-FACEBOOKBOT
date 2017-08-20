@@ -4,7 +4,7 @@
 	
 ## Contact
 	
-  FB: <a href="https://www.facebook.com/GiayNhapcoder">Giấy Nháp</a> 
+  FB: <a href="https://www.facebook.com/GiayNhapcoder">Giấy Nháp</a> <br>
   Email: giaynhapcoder@gmail.com
 	
 	
