@@ -1,11 +1,11 @@
 ## [ BASE CODE ]Facebook ChatBot
 	
-	Author: Giấy Nháp
+  Author: Giấy Nháp
 	
-## Fanpage	
+## Contact
 	
-   <a href="https://www.facebook.com/GiayNhapcoder">https://www.facebook.com/ketbankhonggoihan</a> 
-   Email: giaynhapcoder@gmail.com
+  FB: <a href="https://www.facebook.com/GiayNhapcoder">Giấy Nháp</a> 
+  Email: giaynhapcoder@gmail.com
 	
 	
 ## Fanpage	
