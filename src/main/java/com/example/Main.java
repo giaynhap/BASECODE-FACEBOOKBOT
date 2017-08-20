@@ -67,17 +67,12 @@ public class Main {
   
   @RequestMapping("/webhook")
   public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
-	 
+	  System.out.println("output");
 	  ArrayList<String> output = new ArrayList<String>();
+	  Core.getInstance().parse( getRequestString(request) );
       return Core.getInstance().parse(  request);
   }
-  @RequestMapping(value="/webhook", method=RequestMethod.POST )
-  public @ResponseBody String webhook( HttpServletRequest request) {
-	 
-	  System.out.println("output");
-	  return Core.getInstance().parse( getRequestString(request) );
-  }
-  
+
   public String getRequestString( HttpServletRequest request )
   {
 	  StringBuffer jb = new StringBuffer();
