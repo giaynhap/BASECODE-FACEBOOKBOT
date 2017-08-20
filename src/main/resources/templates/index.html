@@ -1,0 +1,50 @@
+<style>
+a{
+color:white;
+text-decoration:none;
+}
+a:hover{
+color:#d65c37;
+ 
+}
+</style>
+<body style="background-color:#333">
+<div style="margin-left:30%">
+<div style="color:white;margin-left:40%;font-family:Saira Condensed;display:inline">
+
+<br>░█▀▀█ ─▀─ █▀▀█ █──█ ░█▄─░█ █──█ █▀▀█ █▀▀█ 
+<br>░█─▄▄ ▀█▀ █▄▄█ █▄▄█ ░█░█░█ █▀▀█ █▄▄█ █──█
+<br>░█▄▄█ ▀▀▀ ▀──▀ ▄▄▄█ ░█──▀█ ▀──▀ ▀──▀ █▀▀▀
+<div style="padding:40px;line-height:10px;font-family:Monospace">
+ <img src="https://www.seeklogo.net/wp-content/uploads/2016/09/facebook-icon-preview-200x200.png" width="30px" >
+ <div style="position:relative;top:-20px;left:30px">Fb: <a href="https://www.facebook.com/GiayNhapcoder">Giấy Nháp</a> </div>
+
+<img src="http://www.free-icons-download.net/images/mypages-icon-18538.png" width="30px" >
+
+<div style="position:relative;top:-20px;left:30px"> Fanpage: <a href="https://www.facebook.com/ketbankhonggoihan/">Chat với người lạ</a> </div>
+
+</div>
+</div>
+</div>
+<hr width="100%">
+<div style="color:white;padding:40px;line-height:20px;font-family:Monospace">
+ HOST NAME: <span th:text="${hostname}" > <br>
+ PAGE: <span th:text="${PageID}" >
+</div>
+ 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=1207423352719639";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id = "page_fanpage2" style="position: fixed; ; width: 300px;left: calc(100% - 300px);bottom: 0px;z-index:10">
+
+	<div id="page_fanpage" >
+
+		<div class="fb-page" data-href="https://www.facebook.com/ketbankhonggoihan/" data-width="300" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/ketbankhonggoihan/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ketbankhonggoihan/">Chat Với Người Lạ</a></blockquote></div>
+	</div>  
+</div>
+</body>
