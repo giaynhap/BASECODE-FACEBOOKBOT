@@ -1,8 +1,10 @@
 package object;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -38,8 +40,8 @@ public class Https {
 		con.setRequestProperty("Content-Type", "application/json");
 
 		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes(urlParameters);
+		BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(con.getOutputStream(), "UTF-8"));
+		wr.write(urlParameters);
 		wr.flush();
 		wr.close();
 		int responseCode = con.getResponseCode();

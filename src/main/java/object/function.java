@@ -9,7 +9,7 @@ public class function {
 	{
 		JSONObject obj = makeBaseJson(  user_id);
 		 
-		obj.put("message", new JSONObject().put("text", escape_string(text)));
+		obj.put("message", new JSONObject().put("text", text));
 		return obj.toString();
 		
 	}
