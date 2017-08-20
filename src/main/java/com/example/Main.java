@@ -60,7 +60,7 @@ public class Main {
 	  try {
 		String hostName = InetAddress.getLocalHost().getHostName();
 		model.put("hostname", hostName);
-		model.put("PageID: ", Configs.pageID);
+		model.put("PageID", Configs.pageID);
 	} catch (UnknownHostException e) {
 		e.printStackTrace();
 	}
