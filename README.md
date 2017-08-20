@@ -4,7 +4,7 @@
 	
 ## Contact
 	
-	FB: <a href="https://www.facebook.com/GiayNhapcoder">Giấy Nháp</a> 
+	FB:  <a href="https://www.facebook.com/GiayNhapcoder">https://www.facebook.com/ketbankhonggoihan</a> 
 	Email: giaynhapcoder@gmail.com
 	
 ## Fanpage	
