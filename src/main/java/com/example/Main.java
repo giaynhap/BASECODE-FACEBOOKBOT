@@ -85,7 +85,7 @@ public class Main {
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
   public @ResponseBody String webhook( HttpServletRequest request) {
 	 
-	  System.out.println("Rev Mesage from facebook");
+	 
 	  ProcessMain.getInstance().add(request);
 	  return "";
   }

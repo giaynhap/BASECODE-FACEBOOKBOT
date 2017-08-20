@@ -31,6 +31,7 @@ public class ProcessMain extends ProcessAbs{
 	{
 		if (queue != null && queue.size() > 0)
 		{
+			 System.out.println("Analsy data request Post ");
 			 ArrayList<Object> list = new ArrayList<Object>();
 			 
 	         queue.drainTo(list);
