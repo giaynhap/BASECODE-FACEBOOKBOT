@@ -34,10 +34,8 @@ public class Core {
 		String output="";
 		Map<String, String[]> Queries = request.getParameterMap();
 		for (Map.Entry e :   Queries.entrySet())
-		{
 			output = analysis_key((String)e.getKey(), (String[])e.getValue(),Queries);
 			
-		}
 		return output;
 	}
 	private String analysis_key(String key, String[] value,Map<String, String[]> queries)
@@ -45,6 +43,7 @@ public class Core {
 		String output = "";
 		if (key.contains("hub.verify_token"))
 		{ 
+			if (!queries.get("hub.verify_token")[0].equals(Configs.appKey)) return null;
 			output = queries.get("hub.challenge")[0];
 		}
 		return output;

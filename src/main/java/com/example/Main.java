@@ -69,8 +69,6 @@ public class Main {
   public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
-	  
-	 System.out.println(request.getQueryString());
       return Core.getInstance().parse(  request);
   }
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
@@ -89,9 +87,11 @@ public class Main {
 	    while ((line = reader.readLine()) != null)
 	      jb.append(line);
 	  } catch (Exception e) { }
-
-	 return jb.toString();
+	  String rtstr = jb.toString();
+	  System.out.println(rtstr);
+	 return rtstr;
   }
+ 
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
