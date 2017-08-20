@@ -64,32 +64,34 @@ public class Main {
   String index() {
     return "index";
   }
-  private Core Core = new Core();
+  
   @RequestMapping("/webhook")
   public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
 	 
 	  ArrayList<String> output = new ArrayList<String>();
 	  
 	 System.out.println(request.getQueryString());
-		 
-		 
-      return Core.parse(  request);
+      return Core.getInstance().parse(  request);
   }
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
   public @ResponseBody String webhook( HttpServletRequest request) {
 	 
+	  
+	  return Core.getInstance().parse( getRequestString(request) );
+  }
+  
+  public String getRequestString( HttpServletRequest request )
+  {
 	  StringBuffer jb = new StringBuffer();
 	  String line = null;
 	  try {
 	    BufferedReader reader = request.getReader();
 	    while ((line = reader.readLine()) != null)
 	      jb.append(line);
-	  } catch (Exception e) { /*report an error*/ }
+	  } catch (Exception e) { }
 
-	  System.out.println(jb.toString());
-	  return "";
+	 return jb.toString();
   }
-  
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
@@ -122,20 +124,6 @@ public class Main {
       return new HikariDataSource(config);
     }
   }
-  @Bean
-  public EmbeddedServletContainerFactory servletContainer() {
-
-      TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-
-      Connector ajpConnector = new Connector("AJP/1.3");
-      ajpConnector.setProtocol("AJP/1.3");
-      ajpConnector.setPort(9090);
-      ajpConnector.setSecure(false);
-      ajpConnector.setAllowTrace(false);
-      ajpConnector.setScheme("http");
-      tomcat.addAdditionalTomcatConnectors(ajpConnector);
-
-      return tomcat;
-  }
+ 
 
 }

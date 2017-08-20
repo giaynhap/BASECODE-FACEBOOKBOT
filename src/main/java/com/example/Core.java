@@ -24,7 +24,7 @@ import java.util.Map;
 @SpringBootApplication
 public class Core {
 	private static Core object;
-	private Core  getInstance()
+	public static Core  getInstance()
 	{
 		if (object==null) object = new Core();
 		return  object ;
@@ -48,5 +48,10 @@ public class Core {
 			output = queries.get("hub.challenge")[0];
 		}
 		return output;
+	}
+	public String parse( String requestString)
+	{
+		return "";
+		 
 	}
 }
