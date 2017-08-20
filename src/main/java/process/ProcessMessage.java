@@ -1,8 +1,14 @@
 package process;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.json.JSONException;
+
+import object.BaseMessage;
+import object.function;
 
 public class ProcessMessage extends ProcessAbs{
 	private static ProcessMessage processMessage;
@@ -20,7 +26,23 @@ public class ProcessMessage extends ProcessAbs{
 	@Override
 	public void process()
 	{
-		
+		if (queue!=null &&queue.size()>0)
+		{
+			ArrayList<Object> list = new ArrayList<Object>();
+			queue.drainTo(list);
+			for (Object msg : list)
+			{
+				BaseMessage message = (BaseMessage)msg;
+				try {
+					String msgRep = function.makeJsonSendText(message.getFromUser(),"FacebookMessageBot-Java-GiấyNháp");
+					System.out.println(msgRep);
+				} catch (JSONException e) {
+					continue;
+				 
+				}
+			}
+			
+		}
 	}
 	
 }

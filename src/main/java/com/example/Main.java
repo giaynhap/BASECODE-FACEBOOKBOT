@@ -19,6 +19,9 @@ package com.example;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import process.ProcessMain;
+import process.ProcessMessage;
+
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,9 +58,17 @@ public class Main {
   @Autowired
   private DataSource dataSource;
 
+  public static void init()
+  {
+	  ProcessMessage.getInstance().start();
+	  ProcessMain.getInstance().start();
+  }
   public static void main(String[] args) throws Exception {
+	  
+	  
+	
     SpringApplication.run(Main.class, args);
-
+    init();
   }
 
   @RequestMapping("/")
@@ -67,15 +78,15 @@ public class Main {
   
   @RequestMapping("/webhook")
   public @ResponseBody String webhook(ModelAndView mav,final HttpServletRequest request) {
-	 
 	  ArrayList<String> output = new ArrayList<String>();
-      return Core.getInstance().parse(  request);
+      return Register.parse(  request);
   }
+  
   @RequestMapping(value="/webhook", method=RequestMethod.POST )
   public @ResponseBody String webhook( HttpServletRequest request) {
 	 
-	  System.out.println("post some t");
-	  return Core.getInstance().parse( getRequestString(request) );
+	  ProcessMain.getInstance().add(request);
+	  return "";
   }
   
   public String getRequestString( HttpServletRequest request )

@@ -22,14 +22,10 @@ import java.util.Map;
 
 @Controller
 @SpringBootApplication
-public class Core {
-	private static Core object;
-	public static Core  getInstance()
-	{
-		if (object==null) object = new Core();
-		return  object ;
-	}
-	public String parse( HttpServletRequest request)
+public class Register {
+	 
+	 
+	public static String parse( HttpServletRequest request)
 	{
 		String output="";
 		Map<String, String[]> Queries = request.getParameterMap();
@@ -38,7 +34,7 @@ public class Core {
 			
 		return output;
 	}
-	private String analysis_key(String key, String[] value,Map<String, String[]> queries)
+	private static String analysis_key(String key, String[] value,Map<String, String[]> queries)
 	{
 		String output = "";
 		if (key.contains("hub.verify_token"))
@@ -48,9 +44,5 @@ public class Core {
 		}
 		return output;
 	}
-	public String parse( String requestString)
-	{
-		return "";
-		 
-	}
+	 
 }
